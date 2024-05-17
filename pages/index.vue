@@ -128,10 +128,10 @@ export default {
 
       this.autoGen.adjustImagesToPuzzleHeight();
       this.autoGen.autogenerate({
-        horizontalPiecesCount: 2,
-        verticalPiecesCount: 2,
-        // horizontalPiecesCount: 3,
-        // verticalPiecesCount: 3,
+        // horizontalPiecesCount: 2,
+        // verticalPiecesCount: 2,
+        horizontalPiecesCount: 3,
+        verticalPiecesCount: 3,
       });
 
       this.autoGen.shuffleGrid();
