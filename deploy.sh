@@ -2,7 +2,9 @@
 
 set -e
 
-npm run generate
+npm install
+
+npm run build
 
 cd dist/
 
