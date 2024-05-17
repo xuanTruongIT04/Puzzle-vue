@@ -1,20 +1,18 @@
 <template lang="">
   <div>
     <!-- Modal -->
-    <div class="play-again" v-if="showModal">
+    <div class="play-again" v-if="showModalExit">
       <div class="modal" id="modal-one" >
         <div class="modal-dialog">
           <div class="modal-header">
-            <h2 class="title">{{ title }}</h2>
             <span class="btn-close" @click="cancel()">×</span>
           </div>
           <div class="modal-body">
-            <p><b>Bạn có muốn chơi lại?</b></p>
-            <p>Time: {{ completeTime }} (s)</p>
+            <p><b>Bạn có chắc chắn muốn thoát game?</b></p>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-reject" @click="cancel()">Thoát</button>
-            <button class="btn" @click="confirm()">Chơi lại</button>
+            <button class="btn" @click="confirmExit()">Rời đi</button>
+            <button class="btn btn-reject" @click="cancelExit()">Ở lại</button>
           </div>
         </div>
       </div>
@@ -24,26 +22,18 @@
 <script>
 export default {
   props: {
-    showModal: {
+    showModalExit: {
       type: Boolean,
       require: true
     },
-    title: {
-      type: String,
-      require: true
-    },
-    completeTime: {
-      type: String,
-      require: true
-    }
   },
   methods: {
-    confirm() {
-      this.$emit("play")
+    confirmExit() {
+      this.$emit("actionAgreeExit")
     },
 
-     cancel() {
-      this.$emit("cancel")
+     cancelExit() {
+      this.$emit("actionRefureExit")
     },
   }
 
@@ -112,7 +102,6 @@ p {
   position: absolute;
   right: 5px;
   top: 0;
-  transition: all 0.1s ease-in;
 }
 .btn-close:hover {
   color: #313131;
