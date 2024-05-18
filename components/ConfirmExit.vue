@@ -11,8 +11,8 @@
             <p><b>Bạn có chắc chắn muốn thoát game?</b></p>
           </div>
           <div class="modal-footer">
-            <button class="btn" @click="confirmExit()">Rời đi</button>
-            <button class="btn btn-reject" @click="cancelExit()">Ở lại</button>
+            <button class="btn btn-reject" @click="confirmExit()">Rời đi</button>
+            <button class="btn" @click="cancelExit()">Ở lại</button>
           </div>
         </div>
       </div>
@@ -29,11 +29,11 @@ export default {
   },
   methods: {
     confirmExit() {
-      this.$emit("actionAgreeExit")
+      this.$emit("confirmExit")
     },
 
      cancelExit() {
-      this.$emit("actionRefureExit")
+      this.$emit("cancelExit")
     },
   }
 

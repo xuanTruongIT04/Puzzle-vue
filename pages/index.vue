@@ -56,9 +56,10 @@ export default {
       currentTime: 0,
       currentTimeString: '',
       completeTime: '',
-      maxTime: 5,
+      maxTime: 120,
       timerInterval: null,
       autoGen: {},
+      pauseTime: 0,
     }
   },
   computed: {
@@ -102,20 +103,24 @@ export default {
         this.loadImageAndDrawPuzzle()
       }, 200)
     },
-    startTimer() {
+    startTimer(isPause = false) {
       this.startTime = Date.now()
-      if (this.timerInterval) clearInterval(this.timerInterval)
+
+      if(!isPause && this.timerInterval) clearInterval(this.timerInterval)
 
       this.timerInterval = setInterval(() => {
-        this.currentTime = Math.floor((Date.now() - this.startTime) / 1000)
+        if(!isPause)
+          this.currentTime = Math.floor((Date.now() - this.startTime) / 1000)
+
         this.updateCurrentTimeString()
 
         if (this.currentTime === this.maxTime) {
           this.isComplete = false
           this.endGame(this.isComplete)
         }
-      }, 500)
+      }, 1000)
     },
+    continueGame() {},
     clearTimeInterval() {
       if (this.timerInterval) clearInterval(this.timerInterval)
     },
@@ -142,15 +147,29 @@ export default {
       this.showModal = true
     },
     actionAgreeExit() {
+      // console.log('AGREE')
       this.showModal = false
+      this.clearTimeInterval()
       let url = '/home'
       this.$router.push(url)
     },
     actionRefureExit() {
-      this.showModal = true
+      this.showModalExit = false
+      this.currentTime = this.pauseTime
+      this.startTimer(true)
+      // console.log(this.pauseTime);
+      // console.log(this.currentTime)
+      this.updateCurrentTimeString()
     },
     exitGame() {
-      this.showModalExit = true;
+      if (this.showModalExit) {
+        this.pauseTime = this.currentTime
+      }
+      console.log(this.pauseTime)
+      console.log(this.currentTime)
+
+      // this.clearTimeInterval()
+      this.showModalExit = true
     },
     targetSuggest() {
       const background = document.getElementById('puzzle-background')
