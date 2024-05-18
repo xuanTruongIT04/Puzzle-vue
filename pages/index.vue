@@ -56,7 +56,7 @@ export default {
       currentTime: 0,
       currentTimeString: '',
       completeTime: '',
-      maxTime: 120,
+      maxTime: 5,
       timerInterval: null,
       autoGen: {},
       pauseTime: 0,
@@ -109,8 +109,12 @@ export default {
       if(!isPause && this.timerInterval) clearInterval(this.timerInterval)
 
       this.timerInterval = setInterval(() => {
-        if(!isPause)
+        if(!isPause) {
           this.currentTime = Math.floor((Date.now() - this.startTime) / 1000)
+        }
+        else {
+          this.currentTime = Math.floor((Date.now() - this.startTime + this.pauseTime * 1000) / 1000)
+        }
 
         this.updateCurrentTimeString()
 
@@ -120,7 +124,7 @@ export default {
         }
       }, 1000)
     },
-    continueGame() {},
+    // continueGame() {},
     clearTimeInterval() {
       if (this.timerInterval) clearInterval(this.timerInterval)
     },
@@ -147,7 +151,6 @@ export default {
       this.showModal = true
     },
     actionAgreeExit() {
-      // console.log('AGREE')
       this.showModal = false
       this.clearTimeInterval()
       let url = '/home'
@@ -155,20 +158,12 @@ export default {
     },
     actionRefureExit() {
       this.showModalExit = false
-      this.currentTime = this.pauseTime
       this.startTimer(true)
-      // console.log(this.pauseTime);
-      // console.log(this.currentTime)
       this.updateCurrentTimeString()
     },
     exitGame() {
-      if (this.showModalExit) {
-        this.pauseTime = this.currentTime
-      }
-      console.log(this.pauseTime)
-      console.log(this.currentTime)
-
-      // this.clearTimeInterval()
+      this.pauseTime = this.currentTime
+      this.clearTimeInterval()
       this.showModalExit = true
     },
     targetSuggest() {
