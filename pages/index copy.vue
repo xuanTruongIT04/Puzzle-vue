@@ -12,15 +12,12 @@
         <div class="puzzle-contain">
           <div id="puzzle-background" class="puzzle-background"></div>
           <div id="puzzle" class="puzzle-canvas"></div>
-          <div class="suggest-container">
-
           <div
-            class="suggest-info"
+            class="suggest"
             @click="targetSuggest()"
           >
-            <span>Click toggle suggest</span>
             <img class="suggest-image" src="~/static/malharro.jpg" alt="" />
-          </div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -264,6 +261,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 80vh;
 }
 
 #game {
@@ -307,7 +305,7 @@ export default {
   z-index: 2;
 }
 
-.suggest-container {
+.suggest {
   position: absolute;
   bottom: 0px;
   left: 0;
@@ -315,15 +313,11 @@ export default {
   z-index: 999999;
 }
 
-.suggest-info {
-
-}
-
-.suggest-info:hover {
+.suggest:hover {
   cursor: pointer;
 }
 
-.suggest-info img {
+.suggest img {
   width: 1px;
   height: 1px;
   border: solid;
