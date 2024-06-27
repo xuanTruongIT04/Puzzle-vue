@@ -235,6 +235,7 @@ export default {
 
       const puzzle = this.autoGen.puzzle;
       puzzle['dragMode']['dragShouldDisconnect'] = ( function (piece, dx, dy) {
+        console.log(1111);
           console.log(piece, dx, dy)
           return piece.horizontalConnector.openMovement(piece, dx) && piece.verticalConnector.openMovement(piece, dy);
       } );
