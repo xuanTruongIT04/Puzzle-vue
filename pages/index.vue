@@ -147,7 +147,7 @@ export default {
       this.clearTimeInterval()
 
       this.titleModalPlayAgain = result
-        ? 'Chúc mừng bạn đã chiến thắng!'
+        ? 'Chúc mừng bạn đã chiến t0ddddddhắng!'
         : 'Chúc bạn may mắn lần sau!'
 
       this.showModal = true
