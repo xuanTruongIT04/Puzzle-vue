@@ -211,6 +211,8 @@ export default {
         maxPiecesCount: 9,
       })
 
+      
+
       this.autoGen.adjustImagesToPuzzleHeight()
       this.autoGen.autogenerate({
         // horizontalPiecesCount: 2,
@@ -230,6 +232,13 @@ export default {
       })
 
       this.autoGen.draw()
+
+      const puzzle = canvas.puzzle;
+      puzzle['dragMode']['dragShouldDisconnect'] = ( function (piece, dx, dy) {
+          console.log(piece, dx, dy)
+          return piece.horizontalConnector.openMovement(piece, dx) && piece.verticalConnector.openMovement(piece, dy);
+      } );
+
     },
 
     clearCanvas() {
